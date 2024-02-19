@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,9 +59,22 @@ public class PhonebookController extends HttpServlet {
 			System.out.println(hp);
 			System.out.println(company);
 			
+			//db관련 업무
+			PhoneDao phoneDao = new PhoneDao();//메모리에 올려야 personInsert.메소드를 쓸 수 있다.
+			
 			//db에 저장 -> 연결하기위해서 build path, Deployment Assembly설정
-			PhoneDao phoneDao = new PhoneDao();//메모리에 올려야 personInsert.메소드를 쓸 수 있다. 
 			phoneDao.personInsert(personVo);
+			
+			//db에서 전체 데이터 가져오기
+			List<PersonVo> personList = phoneDao.personSelect();
+//			System.out.println(personList);
+			
+			//request에 담기
+			request.setAttribute("personList", personList); //앞에는 문자열이고 뒤에는 주소를 넣어주기=>request안에 주소(0x999)를 넣어준것임
+			
+			//포워드
+			RequestDispatcher rd=  request.getRequestDispatcher("/list.jsp");
+			rd.forward(request, response);//같이 넘겨줘야해서 꼭 써줘야함.
 			
 		}
 		
