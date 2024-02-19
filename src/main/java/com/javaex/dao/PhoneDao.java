@@ -87,8 +87,9 @@ public class PhoneDao {// db 관련된 일만 전문적으로 하는 Dao
 	}
 	
 	// 등록
-	public int personInsert(PersonVo personVo) { //묶은걸 주소를 써주기 ('자료형' '주소')
-		int count = -1; //-1이라면 시작도 못한거임.
+	public int personInsert(PersonVo personVo) { //묶은걸 주소를 써주기 ('자료형' '주소')/void인데 성공이 되면 숫자로 값을 알려주는걸로 하고싶다. 하면 int로 바꾸고 return해주기.
+		int count = -1; //0은 있을 수 있지만 -1이라면 시작도 못한거임.
+		
 		// 0. import java.sql.*;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -139,7 +140,7 @@ public class PhoneDao {// db 관련된 일만 전문적으로 하는 Dao
 				System.out.println("error:" + e);
 			}
 		}
-		return count;
+		return count; // int값이라 void에서 int로 바꿔줌. 안에만 있으면 살아있지 못하니까 위에 먼저 선언을 해줌.
 	}
 	// 삭제
 	
