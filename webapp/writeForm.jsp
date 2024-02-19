@@ -35,7 +35,7 @@ http://localhost:8080/phonebook3/pbc?name=황일영&hp=010&company=02
 	
 	<input type="text" name="action" value="insert"> <!-- action에 값을 넣어주기 위해서 만들어줌. 개발할땐 text로 놓고 마지막에 hidden으로 안보이게하기 -->
 	<br>
-	<button type="submit">등록</button>
+	<button type="submit">등록</button> 
 </form>
 <br>
 <a href="">리스트페이지로 이동</a>
