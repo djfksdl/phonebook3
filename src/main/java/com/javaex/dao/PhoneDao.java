@@ -18,9 +18,9 @@ public class PhoneDao {// db 관련된 일만 전문적으로 하는 Dao
 	// 메소드-일반
 
 	// 전체 가져오기
-	public List<PersonVo> personSelect() {//void로 해놨다가 주소를 따라가면 자료형이 저렇게 되어있어서 바꿔준다.return을 하기떄문에
+	public List<PersonVo> personSelect() {//void로 해놨다가 주소를 따라가면 자료형이 저렇게 되어있어서 바꿔준다.return을 하기떄문에/ 다가져오기라서 ()안에 정보를 줄건 없다.
 		
-		List<PersonVo> personList = new ArrayList<PersonVo>();
+		List<PersonVo> personList = new ArrayList<PersonVo>(); //리스트로 관리할껀데 전역변수로 만들어서 오래 가게 해줌.
 		
 		// 0. import java.sql.*;
 		Connection conn = null;
@@ -35,19 +35,19 @@ public class PhoneDao {// db 관련된 일만 전문적으로 하는 Dao
 			conn = DriverManager.getConnection(url, "phone", "phone");
 			
 		// 3. SQL문 준비 / 바인딩 / 실행
-			//SQL문 준비
+			//SQL문 준비 - 전체가져오는건 *쓰면 안됨. 다 써주기
 			String query = "";
 			query += " select person_id ";
-			query += " ,name ";
-			query += " ,hp ";
-			query += " ,company ";
+			query += " 		 ,name ";
+			query += " 		 ,hp ";
+			query += " 		 ,company ";
 			query += " from person ";
 			
 			//바인딩
 			pstmt = conn.prepareStatement(query);
 
 			//실행
-			rs = pstmt.executeQuery(); //위에 이미 정의해놨음.
+			rs = pstmt.executeQuery(); //위에 이미 정의해놨음.(select문만 다르다!executeUpdate가 아님!)
 			
 		// 4.결과처리
 			
@@ -59,9 +59,10 @@ public class PhoneDao {// db 관련된 일만 전문적으로 하는 Dao
 				
 				// db에서 가져온 데이터 vo로 묶기
 				PersonVo personVo = new PersonVo(personId, name, hp , company);
-				// 리스트에 주소추가
-				personList.add(personVo);
 //				System.out.println(personVo);
+
+				// 리스트에 주소추가- 이거안해주면 위에서 만든거 생기고 끝나고 생기고 끝남.
+				personList.add(personVo);
 			}
 		} catch (ClassNotFoundException e) {
 		System.out.println("error: 드라이버 로딩 실패 - " + e);
@@ -83,7 +84,7 @@ public class PhoneDao {// db 관련된 일만 전문적으로 하는 Dao
 		System.out.println("error:" + e);
 		}
 		}
-		return personList;
+		return personList; //주소를 넘기기 위해 return해줌.-> 자료형도 void에서 바꿔줌.
 	}
 	
 	// 등록
@@ -220,8 +221,8 @@ public class PhoneDao {// db 관련된 일만 전문적으로 하는 Dao
 			String query = "";
 			query += " update person ";
 			query += " set name=? ";
-			query += " ,hp =? ";
-			query += " ,company= ? ";
+			query += " 	  ,hp =? ";
+			query += " 	  ,company= ? ";
 			query += " where person_id=? ";
 			
 			// 바인딩

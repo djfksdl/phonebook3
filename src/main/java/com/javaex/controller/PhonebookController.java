@@ -71,11 +71,11 @@ public class PhonebookController extends HttpServlet {// HttpServlet을 상속�
 			
 			//리다이렉트 사용으로 주석처리
 //			//db에서 전체 데이터 가져오기
-//			List<PersonVo> personList = phoneDao.personSelect();
-////			System.out.println(personList);
+//			List<PersonVo> personList = phoneDao.personSelect(); <-주소달라고하는것
+////			System.out.println(personList); <-리스트 찍는것
 //			
-//			//request에 담기
-//			request.setAttribute("personList", personList); //앞에는 문자열이고 뒤에는 주소를 넣어주기=>request안에 주소(0x999)를 넣어준것임/ "이름"이 jsp에서도 같아야 인식할 수 있음.(주의)
+//			//request에 담기 - 포워드 전에 request에 주소 넣어서 옮기기
+//			request.setAttribute("personList", personList); //앞에는 여러개이기 때문에 꺼내기 수월하려고 '키값(별명)'을 써주고, 뒤에는 주소를 넣어주기/ "이름"이 jsp에서도 같아야 인식할 수 있음.(주의)
 //			
 //			//포워드
 //			RequestDispatcher rd=  request.getRequestDispatcher("/list.jsp");
