@@ -66,18 +66,56 @@ public class PhonebookController extends HttpServlet {// HttpServlet을 상속�
 			//db에 저장 -> 연결하기위해서 build path, Deployment Assembly설정
 			phoneDao.personInsert(personVo);
 			
-			//db에서 전체 데이터 가져오기
+			//리다이렉트- 빈화면인데 주소 숨기고가서 엔터치는것과 똑같다. 그래서 빈화면에서 리스트 나오는 화면으로 바뀐다.
+			response.sendRedirect("/phonebook3/pbc?action=list"); //주소 앞에 부분 삭제해도됨
+			
+			//리다이렉트 사용으로 주석처리
+//			//db에서 전체 데이터 가져오기
+//			List<PersonVo> personList = phoneDao.personSelect();
+////			System.out.println(personList);
+//			
+//			//request에 담기
+//			request.setAttribute("personList", personList); //앞에는 문자열이고 뒤에는 주소를 넣어주기=>request안에 주소(0x999)를 넣어준것임/ "이름"이 jsp에서도 같아야 인식할 수 있음.(주의)
+//			
+//			//포워드
+//			RequestDispatcher rd=  request.getRequestDispatcher("/list.jsp");
+//			rd.forward(request, response);//같이 넘겨줘야해서 꼭 써줘야함.
+			
+		}else if("list".equals(action)){
+			System.out.println("list:리스트");
+			
+			//db사용
+			PhoneDao phoneDao = new PhoneDao();//Dao써야해서 메모리에 올림- 어제 만든것과 동일한.pSelect() 쓸 수 있어서 따로 안만들고 만든거 씀
+			
+			//리스트 가져오기
 			List<PersonVo> personList = phoneDao.personSelect();
 //			System.out.println(personList);
 			
-			//request에 담기
-			request.setAttribute("personList", personList); //앞에는 문자열이고 뒤에는 주소를 넣어주기=>request안에 주소(0x999)를 넣어준것임
+			//데이터 담기 후 포워드
+			request.setAttribute("personList", personList);
 			
-			//포워드
-			RequestDispatcher rd=  request.getRequestDispatcher("/list.jsp");
-			rd.forward(request, response);//같이 넘겨줘야해서 꼭 써줘야함.
+			RequestDispatcher rd = request.getRequestDispatcher("/list.jsp");
+			rd.forward(request, response);
 			
+			
+			
+		}else if("delete".equals(action)) {
+			System.out.println("delete:삭제");
+			int no = Integer.parseInt(request.getParameter("no"));// String이라 캐스팅 ㄱㄱ
+			System.out.println(no);
+			
+			// db사용
+			PhoneDao phoneDao = new PhoneDao();
+
+			// 삭제
+			phoneDao.personDelete(no);
+			
+			// 리다이렉트 - 반응이니까 request가 아닌 response를 써준다.
+			response.sendRedirect("/phonebook3/pbc?action=list"); 
 		}
+//		else if() {
+//			
+//		}
 		
 
 	}

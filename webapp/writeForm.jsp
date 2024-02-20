@@ -17,7 +17,7 @@
 http://localhost:8080/phonebook3/pbc?name=황일영&hp=010&company=02 
 <!--  pbc까지가 프로그램이다. 뒤에는 데이터임. -->
 
-<form action="http://localhost:8080/phonebook3/pbc" method="POST"><!-- get으로 해서 먼저는 보이게하기 -->
+<form action="/phonebook3/pbc" method="get"><!-- get으로 해서 먼저는 보이게하기, 주소는 앞에 htpp:~localhost생략가능 -->
 	<div>
 		<label>이름(name)</label> <!-- 한줄 전체를 요소라고함. 태그 + 내용 -->
 		<input type="text" name="name" value=""><!-- name="name"은 다른거다.  -->
@@ -25,7 +25,7 @@ http://localhost:8080/phonebook3/pbc?name=황일영&hp=010&company=02
 	
 	<div>
 		<label>핸드폰(hp)</label>
-		<input type="text" name="hp" value="">
+		<input type="text" name="hp" value=""><!-- value는 입력되는 값이라 비워둠 -->
 	</div>
 	
 	<div>
@@ -33,7 +33,7 @@ http://localhost:8080/phonebook3/pbc?name=황일영&hp=010&company=02
 		<input type="text" name="company" value="">
 	</div>
 	
-	<input type="text" name="action" value="insert"> <!-- action에 값을 넣어주기 위해서 만들어줌. 개발할땐 text로 놓고 마지막에 hidden으로 안보이게하기 -->
+	<input type="text" name="action" value="insert"> <!-- 여긴 입력하는 값이 아니라 valuer에 값 넣어줌. 안넣으면 insert가 안넘어와서 컨트롤러가 인식을 못함. 따라서 action에 값을 넣어주기 위해서 만들어줌. 개발할땐 text로 놓고 마지막에 hidden으로 안보이게하기 (내부개발용)-->
 	<br>
 	<button type="submit">등록</button> 
 </form>
