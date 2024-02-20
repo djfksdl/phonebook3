@@ -112,10 +112,52 @@ public class PhonebookController extends HttpServlet {// HttpServlet을 상속�
 			
 			// 리다이렉트 - 반응이니까 request가 아닌 response를 써준다.
 			response.sendRedirect("/phonebook3/pbc?action=list"); 
+			
+		}else if("update".equals(action)) {
+			System.out.println("update:수정폼");
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			request.setAttribute("no", no);
+			//db사용
+			PhoneDao phoneDao = new PhoneDao();//Dao써야해서 메모리에 올림- 어제 만든것과 동일한.pSelect() 쓸 수 있어서 따로 안만들고 만든거 씀
+			
+			//리스트 가져오기
+//			List<PersonVo> personList = phoneDao.personSelect();
+//			System.out.println(personList);
+			
+			//데이터 담기
+//			request.setAttribute("personList", personList);
+			
+			//포워드
+			RequestDispatcher rd=  request.getRequestDispatcher("/updateForm.jsp");
+			rd.forward(request, response);
+			
+		}else if("upload".equals(action)) {
+			System.out.println("update:수정");
+			int no = Integer.parseInt(request.getParameter("no"));// String이라 캐스팅 ㄱㄱ
+			
+			//값을 저장하는 방법
+			String name = request.getParameter("name"); //변수는 이름이 달라도됨. 헷갈려서 같은 이름 써주긴함. 
+			String hp = request.getParameter("hp");
+			String company = request.getParameter("company"); // request에 있는 메소드를 써줌(getParameter)
+			
+			//Vo로 묶기. 지금은 3개인데 더 많아질 수 있음. 하나 이상되면 묶어주는게 좋다.
+//			-> VO를 만들어줘서 한꺼번에 보내준다.
+			PersonVo personVo = new PersonVo(no,name, hp, company); //생성자 추가적으로 만들기 싫으면 set으로 가져오면 됨
+			System.out.println(personVo.toString());
+			
+			// db사용
+			PhoneDao phoneDao = new PhoneDao();
+			
+			//db에 저장 -> 연결하기위해서 build path, Deployment Assembly설정
+			phoneDao.personUpdate(personVo);
+			
+			// 리다이렉트 - 반응이니까 request가 아닌 response를 써준다.
+			response.sendRedirect("/phonebook3/pbc?action=list"); 
+			
+			
+			
 		}
-//		else if() {
-//			
-//		}
 		
 
 	}
