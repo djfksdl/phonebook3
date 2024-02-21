@@ -19,8 +19,8 @@
 <!-- http://localhost:8080/phonebook3/pbc?name=황일영&hp=010&company=02--> 
 <!--  pbc까지가 프로그램이다. 뒤에는 데이터임. -->
 
-<form action="/phonebook3/pbc" method="get"><!-- get으로 해서 먼저는 보이게하기, 주소는 앞에 htpp:~localhost생략가능 -->
-	<input type="hidden" name="no" value="<%=request.getAttribute("no")%>">
+<form action="/phonebook3/pbc" method="get"><!-- get으로 해서 먼저는 보이게하기, 주소는 앞에 http:~localhost생략가능 -->
+	<input type="text" name="no" value="<%=request.getAttribute("no")%>">
 	<div>
 		<label>이름(name)</label> <!-- 한줄 전체를 요소라고함. 태그 + 내용 -->
 		<input type="text" name="name" value="<%=request.getParameter("name") %>"><!-- name="name"은 다른거다.  -->
