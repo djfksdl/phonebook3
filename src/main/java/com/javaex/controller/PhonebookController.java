@@ -132,7 +132,7 @@ public class PhonebookController extends HttpServlet {// HttpServlet을 상속�
 			
 			request.setAttribute("no", no);
 			//db사용
-			PhoneDao phoneDao = new PhoneDao();//Dao써야해서 메모리에 올림- 어제 만든것과 동일한.pSelect() 쓸 수 있어서 따로 안만들고 만든거 씀
+//			PhoneDao phoneDao = new PhoneDao();//Dao써야해서 메모리에 올림- 어제 만든것과 동일한.pSelect() 쓸 수 있어서 따로 안만들고 만든거 씀
 			
 			//포워드
 //			RequestDispatcher rd=  request.getRequestDispatcher("/updateForm.jsp");
