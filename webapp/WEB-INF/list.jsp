@@ -43,7 +43,11 @@
 			<a href="/phonebook3/pbc?action=delete&no=<%=personList.get(i).getPersonId() %>">[삭제]</a>
 			</td>
 			<td>
-			<a href="/phonebook3/pbc?action=update&no=<%=personList.get(i).getPersonId()%>">[수정]</a>
+			<a href="/phonebook3/pbc?action=update&
+			no=<%=personList.get(i).getPersonId()%>&
+			name=<%=personList.get(i).getName()%>&
+			hp=<%=personList.get(i).getHp()%>&
+			company=<%=personList.get(i).getCompany()%>">[수정]
 			</td> <!-- 실제 수정이 아닌 수정폼을 불러오는것! -->
 		</tr>
 	</table>
