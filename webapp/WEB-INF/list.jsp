@@ -2,12 +2,12 @@
 <%@ page import="java.util.List" %> <!-- import시켜주는것 -->
 <%@ page import="com.javaex.vo.PersonVo" %>
 <%
+
 	List<PersonVo> personList = (List<PersonVo>)request.getAttribute("personList");//아까 set으로 넣었기때문에 get으로 꺼내준다.별명인 "personList"를 넣어줬기때문에 이걸로 꺼내온다.
 	// 주소를 꺼냄. 따라가면 List<personVO>가 있다. 
 	//포워드하면서 보낼때 데이터가 여러개 보낼때도 있는데, 다 받을 수 있도록 오브젝트로 만들어놨음. 그래서 받는 순간 꺼낼때는 시각을 넓혀서 형변환을 해줘야함. (List<PersonVo>)는 캐스팅임.
 	//그럼 personList가 0x999라 주소가 들어가있는것!
 	System.out.println(personList);
-	
 %>
 <!DOCTYPE html>
 <html>
