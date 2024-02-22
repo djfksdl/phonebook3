@@ -130,10 +130,15 @@ public class PhonebookController extends HttpServlet {// HttpServlet을 상속�
 			System.out.println("update:수정폼");
 			int no = Integer.parseInt(request.getParameter("no"));
 			
-			request.setAttribute("no", no);
 			//db사용
-//			PhoneDao phoneDao = new PhoneDao();//Dao써야해서 메모리에 올림- 어제 만든것과 동일한.pSelect() 쓸 수 있어서 따로 안만들고 만든거 씀
+			PhoneDao phoneDao = new PhoneDao();//Dao써야해서 메모리에 올림- 어제 만든것과 동일한.pSelect() 쓸 수 있어서 따로 안만들고 만든거 씀
 			
+			//db에서 한개만 꺼내오기!
+			PersonVo personVo= phoneDao.selectOne(no);
+			
+			//request에 atrribute추가
+			request.setAttribute("no", no);//이게 있어야 db에서 그 no를 가져올 수 있음!
+
 			//포워드
 //			RequestDispatcher rd=  request.getRequestDispatcher("/updateForm.jsp");
 //			rd.forward(request, response);

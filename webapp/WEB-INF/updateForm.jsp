@@ -20,7 +20,7 @@
 <!--  pbc까지가 프로그램이다. 뒤에는 데이터임. -->
 
 <form action="/phonebook3/pbc" method="get"><!-- get으로 해서 먼저는 보이게하기, 주소는 앞에 http:~localhost생략가능 -->
-	<input type="text" name="no" value="<%=request.getAttribute("no")%>">
+	<input type="text" name="no" value="<%=request.getParameter("no") %>"><!-- 주소를 꺼내기보다 파라미터를 가져와도됨. 그림보면! -->
 	<div>
 		<label>이름(name)</label> <!-- 한줄 전체를 요소라고함. 태그 + 내용 -->
 		<input type="text" name="name" value="<%=request.getParameter("name") %>"><!-- name="name"은 다른거다.  -->

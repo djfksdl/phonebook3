@@ -86,6 +86,74 @@ public class PhoneDao {// db 관련된 일만 전문적으로 하는 Dao
 		}
 		return personList; //주소를 넘기기 위해 return해줌.-> 자료형도 void에서 바꿔줌.
 	}
+	//한개 가져오기
+	public PersonVo selectOne(int no) {
+		PersonVo personVo =null;
+		// 0. import java.sql.*;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+		// 1. JDBC 드라이버 (Oracle) 로딩
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		// 2. Connection 얻어오기
+			String url = "jdbc:mysql://localhost:3306/phone_db";
+			conn = DriverManager.getConnection(url, "phone", "phone");
+			
+		// 3. SQL문 준비 / 바인딩 / 실행
+			//SQL문 준비 - 전체가져오는건 *쓰면 안됨. 다 써주기
+			String query = "";
+			query += " select person_id ";
+			query += " 		 ,name ";
+			query += " 		 ,hp ";
+			query += " 		 ,company ";
+			query += " from person ";
+			query += " where person_id=? ";
+			
+			//바인딩
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+
+			//실행
+			rs = pstmt.executeQuery(); //위에 이미 정의해놨음.(select문만 다르다!executeUpdate가 아님!)
+			
+		// 4.결과처리
+			
+			while(rs.next()) { //다음줄로가다가 끝나면 false나오는데 그때까지 반복해서 내려간다.
+				int personId = rs.getInt("person_id");
+				String name = rs.getString("name");
+				String hp = rs.getString("hp");
+				String company = rs.getString("company");
+				
+				// db에서 가져온 데이터 vo로 묶기
+				personVo = new PersonVo(personId, name, hp , company);
+//						System.out.println(personVo);
+
+			}
+		} catch (ClassNotFoundException e) {
+		System.out.println("error: 드라이버 로딩 실패 - " + e);
+		} catch (SQLException e) {
+		System.out.println("error:" + e);
+		} finally {
+		// 5. 자원정리
+		try {
+		if (rs != null) {
+		rs.close();
+		} 
+		if (pstmt != null) {
+		pstmt.close();
+		}
+		if (conn != null) {
+		conn.close();
+		}
+		} catch (SQLException e) {
+		System.out.println("error:" + e);
+		}
+		}
+		return personVo;
+	}
 	
 	// 등록
 	public int personInsert(PersonVo personVo) { //묶은걸 주소를 써주기 ('자료형' '주소')/void인데 성공이 되면 숫자로 값을 알려주는걸로 하고싶다. 하면 int로 바꾸고 return해주기.
