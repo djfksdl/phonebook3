@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.javaex.vo.PersonVo" %>
+<%
+	PersonVo personInfo = (PersonVo)request.getAttribute("personVo");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -20,20 +23,20 @@
 <!--  pbc까지가 프로그램이다. 뒤에는 데이터임. -->
 
 <form action="/phonebook3/pbc" method="get"><!-- get으로 해서 먼저는 보이게하기, 주소는 앞에 http:~localhost생략가능 -->
-	<input type="text" name="no" value="<%=request.getParameter("no") %>"><!-- 주소를 꺼내기보다 파라미터를 가져와도됨. 그림보면! -->
+	<input type="text" name="no" value="<%=personInfo.getPersonId() %>"><!-- 주소를 꺼내기보다 파라미터를 가져와도됨. 그림보면! -->
 	<div>
 		<label>이름(name)</label> <!-- 한줄 전체를 요소라고함. 태그 + 내용 -->
-		<input type="text" name="name" value="<%=request.getParameter("name") %>"><!-- name="name"은 다른거다.  -->
+		<input type="text" name="name" value="<%=personInfo.getName() %>"><!-- name="name"은 다른거다.  -->
 	</div>
 	
 	<div>
 		<label>핸드폰(hp)</label>
-		<input type="text" name="hp" value="<%=request.getParameter("hp") %>"><!-- value는 입력되는 값이라 비워둠 -->
+		<input type="text" name="hp" value="<%=personInfo.getHp() %>"><!-- value는 입력되는 값이라 비워둠 -->
 	</div>
 	
 	<div>
 		<label>회사(company)</label>
-		<input type="text" name="company" value="<%= request.getParameter("company") %>">
+		<input type="text" name="company" value="<%= personInfo.getCompany() %>">
 	</div>
 	
 	<input type="text" name="action" value="upload" > <!-- 여긴 입력하는 값이 아니라 value에 값 넣어줌. 안넣으면 insert가 안넘어와서 컨트롤러가 인식을 못함. 따라서 action에 값을 넣어주기 위해서 만들어줌. 개발할땐 text로 놓고 마지막에 hidden으로 안보이게하기 (내부개발용)-->

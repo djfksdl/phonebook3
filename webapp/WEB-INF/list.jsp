@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ page import="java.util.List" %> <!-- import시켜주는것 -->
 <%@ page import="com.javaex.vo.PersonVo" %>
 <%
@@ -9,6 +11,8 @@
 	//그럼 personList가 0x999라 주소가 들어가있는것!
 	System.out.println(personList);
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,13 +46,8 @@
 			<%=personList.get(i).getPersonId() %>
 			<a href="/phonebook3/pbc?action=delete&no=<%=personList.get(i).getPersonId() %>">[삭제]</a>
 			</td>
-			<td>
-			<a href="/phonebook3/pbc?action=update&
-			no=<%=personList.get(i).getPersonId()%>&
-			name=<%=personList.get(i).getName()%>&
-			hp=<%=personList.get(i).getHp()%>&
-			company=<%=personList.get(i).getCompany()%>">[수정]
-			</td> <!-- 실제 수정이 아닌 수정폼을 불러오는것! -->
+			<td><a href="/phonebook3/pbc?action=update&no=<%=personList.get(i).getPersonId()%>">[수정]</td>
+			 <!-- 실제 수정이 아닌 수정폼을 불러오는것! -->
 		</tr>
 	</table>
 	<br>

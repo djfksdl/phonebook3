@@ -136,8 +136,8 @@ public class PhonebookController extends HttpServlet {// HttpServlet을 상속�
 			//db에서 한개만 꺼내오기!
 			PersonVo personVo= phoneDao.selectOne(no);
 			
-			//request에 atrribute추가
-			request.setAttribute("no", no);//이게 있어야 db에서 그 no를 가져올 수 있음!
+			//db에서 저장한거 request에 atrribute추가
+			request.setAttribute("personVo", personVo);//이게 있어야 db에서 그 no를 가져올 수 있음!
 
 			//포워드
 //			RequestDispatcher rd=  request.getRequestDispatcher("/updateForm.jsp");
