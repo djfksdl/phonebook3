@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- ${}로 꺼내올 수 있어서 필요없다. -->
+<!-- 자동으로 불러오기 떄문에 필요없다. -->
 
 
 
